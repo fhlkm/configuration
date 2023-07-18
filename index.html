@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="copyright"
+          content="Copyright&copy; SAMSUNG All Rights Reserved.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KNOX Configure console</title>
+
+</head>
+
+<body>
+
+<div>
+    <div id="content-wrapper">
+        <div class="content">
+            <a style="display:none" id="umc" href="smdm://umc.html?program=BULK_ENROLL&service_type=KC" target="_self"></a>
+            <a style="display:none" id="kcc" href="kcc://kcc.html?cmd=KCC_ENROLL" target="_self"></a>
+            <p>Start configuring this device. The device should be pre-registered on the Knox Configure portal.</p>
+            <button id="umc-button" class="next-button align-center" onclick="installUMC()">Set Configuration</button>
+            <p class="re-enroll">Re-enroll into Knox Configure with the latest profile configuration. The device should be configured at least once.</p>
+           <!-- <button id="kcc-button" class="next-button align-center" onclick="installKCC()">Re-enroll</button> -->
+        </div>
+    </div>
+    <div id="content-wrapper-2">
+        <div id="contentBack" class="content">
+            <p>Please go back and try again. If you encountered an error, please refer to this support page.</p>
+            <button class="next-button align-center text-uppercase" onclick="back()">Back</button>
+            <button class="next-button align-center" onclick="goToSupportPage()">GO TO SUPPORT</button>
+        </div>
+    </div>
+</div>
+<div id="footer-wrapper">
+</div>
+<script>
+    document.getElementById("content-wrapper-2").style.display = 'none';
+    var currentYear = new Date().getFullYear();
+    document.getElementById("footer-wrapper").innerHTML = "Copyright " + currentYear + " Samsung. All rights reserved.";
+    var installKCC = function() {
+        document.getElementById("kcc").click();
+        document.getElementById("content-wrapper-2").style.display = 'block';
+        document.getElementById("content-wrapper").style.display = 'none';
+    };
+
+    var installUMC = function() {
+        document.getElementById("umc").click();
+        document.getElementById("content-wrapper-2").style.display = 'block';
+        document.getElementById("content-wrapper").style.display = 'none';
+		var parameters= getUrlParameters()
+		notification(parameters)
+    };
+
+    var goToKnoxPortal = function() {
+        window.open('https://www.samsungknox.com/kc');
+    };
+
+    var back = function() {
+        document.getElementById("content-wrapper").style.display = 'block';
+        document.getElementById("content-wrapper-2").style.display = 'none';
+    };
+
+    var goToSupportPage = function() {
+        window.open('https://configure.samsungknox.com/' + 'en-US' + '/files/q_a.html');
+    };
+	
+
+	
+	
+	function notification(information) {
+		alert (information);
+	}
+	function getUrlParameters() {
+		  // Get the query string from the URL.
+		  var queryString = window.location.search.substring(1);
+
+		  // Split the query string into an array of key-value pairs.
+		  var parameters = queryString.split('&');
+
+		  // Loop through the parameters and extract the values.
+		  for (var i = 0; i < parameters.length; i++) {
+			var parameter = parameters[i].split('=');
+			var key = parameter[0];
+			var value = parameter[1];
+
+			// Store the value in an object.
+			parameters[key] = value;
+		  }
+
+		  // Return the object of parameters.
+		  return parameters;
+	} 
+</script>
+</body>
+</html>
