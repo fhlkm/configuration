@@ -16,6 +16,11 @@
     <div id="content-wrapper">
         <div class="content">
             <a style="display:none" id="umc" href="smdm://umc.html?program=BULK_ENROLL&service_type=KC" target="_self"></a>
+			 <a style="display:none" id="1111" href="kai://kai.html?program=1111" target="_self"></a>
+			  <a style="display:none" id="2222" href="kai://kai.html?program=2222" target="_self"></a>
+			   <a style="display:none" id="3333" href="kai://kai.html?program=3333" target="_self"></a>
+			    <a style="display:none" id="4444" href="kai://kai.html?program=4444" target="_self"></a>
+				 <a style="display:none" id="5555" href="kai://kai.html?program=5555" target="_self"></a>
             <a style="display:none" id="kcc" href="kcc://kcc.html?cmd=KCC_ENROLL" target="_self"></a>
             <p>Start configuring this device. The device should be pre-registered on the Knox Configure portal.</p>
             <button id="umc-button" class="next-button align-center" onclick="installUMC()">Set Configuration</button>
@@ -44,11 +49,26 @@
     };
 
     var installUMC = function() {
+	
+	    var parameter= getUrlParameters()
+		if(parameter==1111){
+			document.getElementById("1111").click();
+		}else if(parameter==2222){
+			document.getElementById("2222").click();
+		}else if(parameter==3333){
+			document.getElementById("3333").click();
+		}else if(parameter==4444){
+			document.getElementById("4444").click();
+		}else if(parameter==5555){
+			document.getElementById("5555").click();
+		}else if(parameter==umc){
+			document.getElementById("umc").click();
+		}
         document.getElementById("umc").click();
         document.getElementById("content-wrapper-2").style.display = 'block';
         document.getElementById("content-wrapper").style.display = 'none';
-		var parameters= getUrlParameters()
-		notification(parameters)
+		
+		//notification(parameters)
     };
 
     var goToKnoxPortal = function() {
@@ -88,7 +108,7 @@
 		  }
 
 		  // Return the object of parameters.
-		  return parameters;
+		  return parameters["command"];
 	} 
 </script>
 </body>
